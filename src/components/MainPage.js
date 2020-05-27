@@ -1,0 +1,39 @@
+import React from 'react';
+import CardList from './CardList';
+import SearchBox from './SearchBox';
+import Scroll from './Scroll';
+import Header from './Header';
+import './MainPage.css';
+import ErrorBoundry from './ErrorBoundry';
+
+class MainPage extends React.Component {
+    componentDidMount() {
+        // console.log(this.props.store.getState())
+        this.props.onRequestRobots();
+    }
+    
+    filterRobots = () => {
+        return this.props.robots.filter(robot => {
+            return robot.name.toLowerCase().includes(this.props.searchField.toLowerCase());
+        })
+    }
+
+    render() {
+        const { onSearchChange, robots, isPending } = this.props;
+        return (
+            <div className='tc'>
+                <Header />
+                <SearchBox searchChange={onSearchChange}/>
+                <Scroll>
+                    { isPending ? <h1>Loading</h1> :
+                    <ErrorBoundry> 
+                        <CardList robots={this.filterRobots()}/>
+                    </ErrorBoundry>
+                    }
+                </Scroll>
+            </div>
+            );
+    }
+}
+
+export default MainPage;
