@@ -5,21 +5,22 @@ import Scroll from './Scroll';
 import Header from './Header';
 import './MainPage.css';
 import ErrorBoundry from './ErrorBoundry';
+import { IAppProps } from '../containers/App';
+import { IRobot } from '../reducers';
 
-class MainPage extends React.Component {
-    componentDidMount() {
-        // console.log(this.props.store.getState())
+class MainPage extends React.Component<IAppProps>  {
+    componentDidMount(): void {
         this.props.onRequestRobots();
     }
     
-    filterRobots = () => {
+    filterRobots = (): Array<IRobot> => {
         return this.props.robots.filter(robot => {
             return robot.name.toLowerCase().includes(this.props.searchField.toLowerCase());
         })
     }
 
-    render() {
-        const { onSearchChange, robots, isPending } = this.props;
+    render(): JSX.Element {
+        const { onSearchChange, isPending } = this.props;
         return (
             <div className='tc'>
                 <Header />

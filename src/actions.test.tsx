@@ -3,9 +3,9 @@ import {
     REQUEST_ROBOTS_PENDING,
     REQUEST_ROBOTS_SUCCESS,
     REQUEST_ROBOTS_FAILED
-} from './constants.js';
+} from './constants';
 
-import * as actions from './actions';
+import { setSearchField, requestRobots } from './actions';
 import configureMockStore from 'redux-mock-store';
 import thunkMiddleware from 'redux-thunk';
 
@@ -18,14 +18,14 @@ describe('actionSearchField', () => {
             type: CHANGE_SEARCH_FIELD,
             payload: text
         }
-        expect(actions.setSearchField(text)).toEqual(expectedAction)
+        expect(setSearchField(text)).toEqual(expectedAction)
     })
 })
 
 describe('actionRequestRobots', () => { 
     it('handles requesting robots API', () => {
         const store = mockStore();
-        store.dispatch(actions.requestRobots())
+        store.dispatch(requestRobots())
         const action = store.getActions()
         const expectedAction = {
             type: REQUEST_ROBOTS_PENDING

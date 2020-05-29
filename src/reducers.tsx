@@ -3,13 +3,30 @@ import {
     REQUEST_ROBOTS_PENDING,
     REQUEST_ROBOTS_SUCCESS,
     REQUEST_ROBOTS_FAILED
-} from './constants.js';
+} from './constants';
 
-const initalStateSearch = {
+import { IDispatchObj } from './actions';
+
+export interface IRobot {
+    name: string;
+    id: number;
+    email: string;
+}
+
+export interface IStateRobots {
+    isPending: boolean,
+    robots: Array<IRobot>,
+    error: string
+}
+export interface IStateSearch {
+    searchField?: string
+}
+
+const initalStateSearch: IStateSearch = {
     searchField: ''
 }
 
-export const searchRobots = (state=initalStateSearch, action={}) => {
+export const searchRobots = (state = initalStateSearch as IStateSearch, action = {} as IDispatchObj) => {
     switch(action.type) {
         case CHANGE_SEARCH_FIELD:
             return Object.assign({}, state, { searchField: action.payload })
@@ -18,13 +35,13 @@ export const searchRobots = (state=initalStateSearch, action={}) => {
     }
 }
 
-const initalStateRobots = {
+const initalStateRobots: IStateRobots = {
     isPending: false,
     robots: [],
     error: ''
 }
 
-export const requestRobots = (state=initalStateRobots, action={}) => {
+export const requestRobots = (state=initalStateRobots as IStateRobots, action = {} as IDispatchObj): IStateRobots => {
     switch(action.type) {
         case REQUEST_ROBOTS_PENDING:
             return Object.assign({}, state, { isPending: true })

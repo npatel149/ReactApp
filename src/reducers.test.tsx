@@ -3,7 +3,7 @@ import {
     REQUEST_ROBOTS_PENDING,
     REQUEST_ROBOTS_SUCCESS,
     REQUEST_ROBOTS_FAILED
-} from './constants.js';
+} from './constants';
 
 import * as reducers from './reducers';
 
@@ -16,7 +16,7 @@ describe('searchRobots', () => {
     })
 
     it('should return the initial state 2', () => {
-        expect(reducers.searchRobots(undefined, {})).toEqual(initialStateSearch)
+        expect(reducers.searchRobots(undefined, { type: ''})).toEqual(initialStateSearch)
     })
 
     it('should handle CHANGE_SEARCH_FIELD action', () => {
@@ -39,7 +39,7 @@ describe('requestRobots', () => {
     })
 
     it('should return the initial state 2', () => {
-        expect(reducers.requestRobots(undefined, {})).toEqual(initalStateRobots)
+        expect(reducers.requestRobots(undefined, { type: ''})).toEqual(initalStateRobots)
     })
 
     it('should handle REQUEST_ROBOTS_PENDING action', () => {
@@ -54,7 +54,7 @@ describe('requestRobots', () => {
 
     it('should handle REQUEST_ROBOTS_SUCCESS action', () => {
         const robots = [{
-            id: '123',
+            id: 123,
             name: 'test',
             email: 'test@gmail.com'  
           }]

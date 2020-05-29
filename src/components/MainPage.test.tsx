@@ -1,13 +1,14 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import MainPage from './MainPage';
-import { jsxEmptyExpression } from '@babel/types';
+import { IRobot } from '../reducers';
 
-let wrapper;
+let wrapper: any;
 
 beforeEach(() => {
     const mockProps = {
         onRequestRobots: jest.fn(),
+        onSearchChange: jest.fn(),
         robots: [],
         searchField: '',
         isPending: false,
@@ -23,6 +24,7 @@ it('renders MainPage without crashing', () => {
 it('filters robots correctly', () => {
     const mockProps2 = {
         onRequestRobots: jest.fn(),
+        onSearchChange: jest.fn(),
         robots: [{
             id: 3,
             name: 'John',
@@ -32,7 +34,7 @@ it('filters robots correctly', () => {
         isPending: false,
         error: ''
     }
-    const wrapper2 = shallow(<MainPage { ...mockProps2} />)
+    const wrapper2: any = shallow(<MainPage { ...mockProps2} />)
     expect(wrapper.instance().filterRobots()).toEqual([]);
     expect(wrapper2.instance().filterRobots()).toEqual([{
         id: 3,
@@ -44,6 +46,7 @@ it('filters robots correctly', () => {
 it('filters robots correctly 2', () => {
     const mockProps3 = {
         onRequestRobots: jest.fn(),
+        onSearchChange: jest.fn(),
         robots: [{
             id: 3,
             name: 'John',
@@ -53,7 +56,7 @@ it('filters robots correctly 2', () => {
         isPending: true,
         error: ''
     }
-    const filteredRobots = []
-    const wrapper3 = shallow(<MainPage { ...mockProps3} />)
+    const filteredRobots: Array<IRobot> = []
+    const wrapper3:any = shallow(<MainPage { ...mockProps3} />)
     expect(wrapper3.instance().filterRobots()).toEqual(filteredRobots);
 })
